@@ -1,5 +1,5 @@
-# Shortest Remaining Time First (SRTF) Scheduling Algorithm
-
+# Shortest Remaining Time First (SRTF) 
+======================================
 This C program demonstrates the Shortest Remaining Time First (SRTF) scheduling algorithm. It schedules processes based on their remaining time (burst time) and calculates the completion time, waiting time, and turnaround time for each process.
 
 ## Algorithm:

@@ -1,5 +1,5 @@
 # First Come First Serve(FCFS)
-==========================
+==============================
 
 This program demonstrates the First Come First Serve (FCFS) scheduling algorithm. It calculates the completion time, waiting time, and turnaround time for a set of processes based on their arrival time and burst time. The program then displays the process details and calculates the total and average turnaround time and waiting time.
 

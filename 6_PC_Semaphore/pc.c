@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int mutex = 1;
-int empty = 5,full=0;
+int empty = 2,full=0;
 int count=0;
 
 int wait(int S)
@@ -37,11 +37,12 @@ void consumer()
 int main()
 {
     int n;
+    printf("\n1. Producer");
+    printf("\n2. Consumer");
+    printf("\n3. Exit");
     while(1)
     {
-        printf("\n1. Producer");
-        printf("\n2. Consumer");
-        printf("\n3. Exit");
+        
         printf("\nEnter the choice: ");
         scanf("%d",&n);
         switch(n)

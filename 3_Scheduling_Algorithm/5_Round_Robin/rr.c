@@ -58,14 +58,14 @@ int main() {
 
   roundRobinScheduling(processes, n, quantum);
 
-  printf("\nID\tAT\tBT\tCT\tWT\tTAT\n\n");
+  printf("\nID\tAT\tBT\tCT\tTAT\tWT\n\n");
   for (int i = 0; i < n; i++) {
     printf("%4d\t%2d\t%2d\t%2d\t%2d\t%2d\n", processes[i].id, processes[i].at,
-           processes[i].bt, processes[i].ct, processes[i].wt,
-           processes[i].tat);
+           processes[i].bt, processes[i].ct,processes[i].tat,processes[i].wt);
   }
-  printf("\nAverage Waiting Time: %.2f", calculateAverageWaitingTime(processes, n));
   printf("\nAverage Turnaround Time: %.2f\n", calculateAverageTurnaroundTime(processes, n));
+  printf("\nAverage Waiting Time: %.2f", calculateAverageWaitingTime(processes, n));
+  
 
   return 0;
 }
@@ -184,6 +184,5 @@ float calculateAverageTurnaroundTime(Process p[], int n) {
   for (int i = 0; i < n; i++) {
     totalTurnaroundTime += p[i].tat;
   }
-
   return totalTurnaroundTime / n;
 }

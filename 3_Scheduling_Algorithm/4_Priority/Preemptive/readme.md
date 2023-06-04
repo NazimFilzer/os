@@ -1,4 +1,5 @@
 # Preemptive Priority Scheduling
+================================
 
 This code implements preemptive priority scheduling, a CPU scheduling algorithm used in operating systems. The program takes input for a set of processes, including their arrival time, burst time, and priority. It then schedules the processes based on their priority, allowing the process with the highest priority (lowest priority number) to execute first. The code calculates various metrics such as completion time, turnaround time, waiting time, and provides an average of these metrics.
 
