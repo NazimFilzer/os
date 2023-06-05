@@ -5,8 +5,7 @@ int mutex = 1;
 int empty = 2,full=0;
 int count=0;
 
-int wait(int S)
-{
+int wait(int S){
     while(S<=0);
     return --S;
 }

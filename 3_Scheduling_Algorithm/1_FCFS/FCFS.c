@@ -20,22 +20,19 @@ int main()
     process process_array[n];
 
     printf("Enter arrival time and burst time for each process(AT BT):\n");
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++){
         process_array[i].pid = i + 1;
         scanf("%d %d", &process_array[i].at, &process_array[i].bt);
+
+        //initilizing wt ct of the processes
+        process_array[i].wt = 0;
+        process_array[i].ct = 0;
     }
 
     
     float total_wt = 0, total_tat = 0;
     int current_time = 0;
 
-    //initilizing wt ct of the processes
-    for (int i = 0; i < n; i++)
-    {
-        process_array[i].wt = 0;
-        process_array[i].ct = 0;
-    }
 
     // Sort the processes based on arrival time (FCFS)
     for (int i = 0; i < n - 1; i++)
@@ -52,8 +49,7 @@ int main()
     }
 
     // Calculating ct tat wt total_wt total_tat 
-    for (int i = 0; i < n; i++)
-    {   
+    for (int i = 0; i < n; i++){   
         //if next process comes after a delay
         if (current_time < process_array[i].at){
             current_time = process_array[i].at;

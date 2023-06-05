@@ -107,7 +107,7 @@ int dequeue() {
 void roundRobinScheduling(Process p[], int n, int quantum) {
   int current_time = 0;         // Current current_time
   int completed = 0;            // No. of Processes Completed
-  int dequeuedItem = -1;        // -1 indicates no Process Index is dequed from the Queue
+  int dequeuedItem = -1;        // -1 indicates no Process Index is dequed from the Ready Queue
   int quantumExpire = 0;        // Indicates the time run within the Quanta
 
   // Waiting for the first process to arrive
@@ -148,10 +148,8 @@ void roundRobinScheduling(Process p[], int n, int quantum) {
 
         if (p[dequeuedItem].rt == 0) {
             p[dequeuedItem].ct = current_time;
-            p[dequeuedItem].tat = p[dequeuedItem].ct -
-                                                p[dequeuedItem].at;
-            p[dequeuedItem].wt =
-                p[dequeuedItem].tat - p[dequeuedItem].bt;
+            p[dequeuedItem].tat = p[dequeuedItem].ct -p[dequeuedItem].at;
+            p[dequeuedItem].wt = p[dequeuedItem].tat - p[dequeuedItem].bt;
             completed++;
             dequeuedItem = -1;
             quantumExpire = 0;
