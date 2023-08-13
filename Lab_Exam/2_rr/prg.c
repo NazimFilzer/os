@@ -1,3 +1,12 @@
+/*
+1)
+
+Imagine you are designing a system that is accessed by multiple users simultaneously 
+(Every user should get equal priority). Implement the suitable CPU scheduling algorithm for 
+this scenario. Find the average waiting time and turnaround time.
+
+*/
+
 #include <stdio.h>
 
 #define MAX_PROCESSES 20
