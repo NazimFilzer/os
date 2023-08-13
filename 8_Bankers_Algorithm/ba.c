@@ -2,6 +2,8 @@
 #define MAX_PROCESS 10
 #define MAX_RESOURCE 10
 
+
+//Function to calculate need matrix
 void calculateNeed(int need[MAX_PROCESS][MAX_RESOURCE], int maxDemand[MAX_PROCESS][MAX_RESOURCE], int allocation[MAX_PROCESS][MAX_RESOURCE], int n, int m) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -22,7 +24,7 @@ int isSafe(int available[MAX_RESOURCE], int maxDemand[MAX_PROCESS][MAX_RESOURCE]
 
     // Check if there is an unfinished process whose needs can be satisfied
     while (count < n) {
-        int found = 0;
+        int found = 0;  // Flag to break out of while loop if resources cannot be allocated to any process
         for (i = 0; i < n; i++) {
             if (finish[i] == 0) {
                 int canBeAllocated = 1;

@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "enabled",
     "files.associations": {
-        "SJF.C": "cpp"
+        "SJF.C": "cpp",
+        "string.h": "c"
     }
 }
