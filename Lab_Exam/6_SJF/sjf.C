@@ -1,0 +1,6 @@
+/*
+Create a scheduling algorithm for efficiently managing diverse processes on a machine to achieve
+faster response times.
+
+
+*/

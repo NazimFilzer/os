@@ -1,91 +1,73 @@
-#include<stdio.h>
-#include<stdbool.h>
-#include<stdlib.h>
-#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct pages{
-    int val;
-    int noAccess;
-} page;
+#define MAX_PAGES 10
 
-void printFrames(page *frames,int f){
-    printf("\n");
-    int i;
-    for(i=0;i<f;i++){
-        printf("%d ",frames[i].val);
-    }
+struct page {
+  int number;
+  int count;
+};
+
+struct page *pages;
+int page_faults;
+
+void init_pages() {
+  pages = malloc(sizeof(struct page) * MAX_PAGES);
+  for (int i = 0; i < MAX_PAGES; i++) {
+    pages[i].number = -1;
+    pages[i].count = 0;
+  }
 }
 
-void findLFU(page *frames,int f){
-    int index = 0;
-    int freq = INT_MAX,rm;
-    for(int i=0;i<f;i++){
-        if(frames[i].noAccess < freq){
-            freq = frames[i].noAccess;
-            rm = i;
-        }
+void reference_page(int page_number) {
+  // Check if the page is already in memory.
+  for (int i = 0; i < MAX_PAGES; i++) {
+    if (pages[i].number == page_number) {
+      // The page is already in memory, so increment its count.
+      pages[i].count++;
+      return;
     }
+  }
 
-    //For FIFO
-    for(int i=rm;i<f-1;i++){
-        frames[i] = frames[i+1];
+  // The page is not in memory, so we need to find a page to replace it with.
+  // We will use the LFU algorithm to find the least frequently used page.
+  int min_count = 99999;
+  int min_index = -1;
+  for (int i = 0; i < MAX_PAGES; i++) {
+    if (pages[i].number == -1) {
+      // This page is free, so we can use it to replace the missing page.
+      min_index = i;
+      break;
+    } else if (pages[i].count < min_count) {
+      min_count = pages[i].count;
+      min_index = i;
     }
+  }
+
+  // If we couldn't find a free page, we need to replace a page that is already in memory.
+  if (min_index == -1) {
+    min_index = rand() % MAX_PAGES;
+  }
+
+  // Replace the page with the missing page.
+  pages[min_index].number = page_number;
+  pages[min_index].count = 1;
+  page_faults++;
 }
 
+int main() {
+  init_pages();
 
-void addPage(int f,page *frames,page Incomingpage){
-    findLFU(frames,f); //Removes LFU Page and makes vacancy at end
-    frames[f-1]= Incomingpage;
-    frames[f-1].noAccess = 1; 
-    printFrames(frames,f);
-}
+  int n;
+  scanf("%d", &n);
 
+  for (int i = 0; i < n; i++) {
+    int page_number;
+    scanf("%d", &page_number);
+    reference_page(page_number);
+  }
 
-bool checkPage(page *frames,int f,int val){
-    for(int i=0;i<f;i++){
-        if(frames[i].val == val){
-            frames[i].noAccess++;
-            return true;
-        }
-    }
-    return false;
-}
+  printf("Number of page faults: %d\n", page_faults);
 
-int LFU(page *ref,page *frames,int f, int n){
-    int fault=0;
-    //Empty Frame
-    for(int i=0;i<f;i++){
-        frames[i].val = -1;
-        frames[i].noAccess = 0;
-    }
-
-    printFrames(frames,f);
-    for(int i=0;i<n;i++){
-        if(!checkPage(frames,f,ref[i].val)){
-            fault++;
-            addPage(f,frames,ref[i]);
-        }
-    }
-
-    return fault;
-}
-
-
-int main(){
-    int i,n,f;
-    printf("Enter Reference String Length: \n");
-    scanf("%d",&n);
-    page* ref = (page*) calloc(n,sizeof(page));
-    printf("Enter Reference String : ");
-    for(i=0;i<n;i++){
-        scanf("%d",&((ref+i)->val));
-    }
-
-    printf("Enter no. of frames : ");
-    scanf("%d",&f);
-    page* frames = (page*) calloc(f,sizeof(page));
-
-    int pageFaults = LFU(ref,frames,f,n);
-
-    printf("\nPage Faults: %d \n",pageFaults);
+  return 0;
 }

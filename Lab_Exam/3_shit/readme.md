@@ -35,7 +35,7 @@ It's recommended to include error handling and validation in your scripts, espec
 
 1. Run the script:
    ```bash
-   bash directory_copy_permission.sh
+   bash shell.sh
    ```
 
 2. Enter the source directory name and the destination directory name when prompted.
